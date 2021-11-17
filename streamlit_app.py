@@ -1,5 +1,8 @@
 import streamlit as st
 import psycopg2
+import app1
+import app2
+
 
 # Initialize connection.
 # Uses st.cache to only run once.
@@ -8,17 +11,11 @@ def init_connection():
     return psycopg2.connect(**st.secrets["postgres"])
 
 conn = init_connection()
-
-# Perform query.
-# Uses st.cache to only rerun when the query changes or after 10 min.
-@st.cache(ttl=600)
-def run_query(query):
-    with conn.cursor() as cur:
-        cur.execute(query)
-        return cur.fetchall()
-
-rows = run_query("SELECT * from project;")
-
-# Print results.
-for row in rows:
-    st.write(f"{row[0]} has a :{row[1]}:")
+PAGES = {
+    "App1": app1,
+    "App2": app2
+}
+st.sidebar.title('Navigation')
+selection = st.sidebar.radio("Go to", list(PAGES.keys()))
+page = PAGES[selection]
+page.app()
