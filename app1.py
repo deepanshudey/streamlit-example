@@ -1,6 +1,6 @@
 import streamlit as st
 import streamlit_app
-
+import psycopg2
 def app():
     st.title('APP1')
     st.write('Welcome to app1')
