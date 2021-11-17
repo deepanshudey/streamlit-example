@@ -1,9 +1,10 @@
 import streamlit as st
+import streamlit_app
 def app():
     st.title('APP1')
     st.write('Welcome to app1')
-
-        # Perform query.
+    conn = init_connection()
+    # Perform query.
     # Uses st.cache to only rerun when the query changes or after 10 min.
     @st.cache(ttl=600)
     def run_query(query):

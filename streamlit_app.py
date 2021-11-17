@@ -10,7 +10,6 @@ import app2
 def init_connection():
     return psycopg2.connect(**st.secrets["postgres"])
 
-conn = init_connection()
 PAGES = {
     "App1": app1,
     "App2": app2
